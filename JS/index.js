@@ -3,27 +3,52 @@ var productPriceInput = document.getElementById("productPriceInput");
 var productCategoryInput = document.getElementById("productCategoryInput");
 var productDescInput = document.getElementById("productDescInput");
 var addProductBtn = document.getElementById("addProduct");
-
+var searchInput = document.getElementById("searchInput");
+var productNameRegExp = /^[A-Z][A-Za-z0-9]{2,30}$/;
+var productPriceRegexp = /^([1-9][0-9]{1,5}|1000000)$/;
+var productCategoryRegExp = /^[A-Z][A-Za-z0-9 ]{2,30}$/;
+var productDescRegExp = /^[A-Z][\w\s.-]{3,300}$/;
 var arrayOfProducts = [];
+var indexUpdating;
 // Add Product
 function addProduct() {
-  var product = {
-    name: productNameInput.value,
-    price: productPriceInput.value,
-    category: productCategoryInput.value,
-    desc: productDescInput.value,
-  };
-  arrayOfProducts.push(product);
-  displayProduct();
-  handleInput();
-  console.log(arrayOfProducts);
+  if (
+    isDataValid(
+      productNameInput.value.trim(),
+      productPriceInput.value.trim(),
+      productCategoryInput.value.trim(),
+      productDescInput.value.trim(),
+    )
+  ) {
+    var product = {
+      name: productNameInput.value,
+      price: productPriceInput.value,
+      category: productCategoryInput.value,
+      desc: productDescInput.value,
+    };
+    if (addProductBtn.innerHTML == " Update Product") {
+      arrayOfProducts.splice(indexUpdating, 1, product);
+      addProductBtn.innerHTML = " Add Product";
+    } else {
+      arrayOfProducts.push(product);
+    }
+    displayProduct();
+    handleInput();
+    console.log(arrayOfProducts);
+  }
 }
-
 // DISPLAY PRODUCT
 function displayProduct() {
   cart = "";
+  var searchInput = document.getElementById("searchInput").value;
+  if (arrayOfProducts.length === 0) {
+    document.getElementById("tBody").innerHTML = "";
+  }
   for (var i = 0; i < arrayOfProducts.length; i++) {
-    cart += `   
+    if (
+      arrayOfProducts[i].name.toLowerCase().includes(searchInput.toLowerCase())
+    ) {
+      cart += `   
      <tr>
                     <td>${i + 1}</td>
                     <td>${arrayOfProducts[i].name}</td>
@@ -33,6 +58,8 @@ function displayProduct() {
                     <td><button onclick="updateProduct(${i})"  class="btn btn-outline-warning">Update</button></td>
                     <td><button onclick="checkDelete(${i})" class="btn btn-outline-danger">Delete</button></td>
                 </tr>`;
+    }
+
     document.getElementById("tBody").innerHTML = cart;
   }
 }
@@ -89,13 +116,40 @@ function handleInput() {
   productCategoryInput.value = "";
   productDescInput.value = "";
 }
-
-function updateProduct(){
-    
+function updateProduct(productIndex) {
+  indexUpdating = productIndex;
+  productNameInput.value = arrayOfProducts[productIndex].name;
+  productPriceInput.value = arrayOfProducts[productIndex].price;
+  productCategoryInput.value = arrayOfProducts[productIndex].category;
+  productDescInput.value = arrayOfProducts[productIndex].desc;
+  addProductBtn.innerHTML = " Update Product";
 }
-
-
-
-
-
-
+// Check Validation
+function isDataValid(name, price, category, desc) {
+  isValid = true;
+  if (!productNameRegExp.test(name)) {
+    document.getElementById("productNameValid").classList.remove("d-none");
+    return (isValid = false);
+  } else {
+    document.getElementById("productNameValid").classList.add("d-none");
+  }
+  if (!productPriceRegexp.test(price)) {
+    document.getElementById("productPriceValid").classList.remove("d-none");
+    return (isValid = false);
+  } else {
+    document.getElementById("productPriceValid").classList.add("d-none");
+  }
+  if (!productCategoryRegExp.test(category)) {
+    document.getElementById("productCategoryVaild").classList.remove("d-none");
+    return (isValid = false);
+  } else {
+    document.getElementById("productCategoryVaild").classList.add("d-none");
+  }
+  if (!productDescRegExp.test(desc)) {
+    document.getElementById("productDesValid").classList.remove("d-none");
+    return (isValid = false);
+  } else {
+    document.getElementById("productDesValid").classList.add("d-none");
+  }
+  return isValid;
+}

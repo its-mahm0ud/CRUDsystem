@@ -29,8 +29,10 @@
           class="form-control mb-1"
           id="productNameInput"
         />
-        <p id="productNameEx" class="alert alert-danger py-0 d-none">
-          This data is Not Vaild
+        <p id="productNameValid" class="alert alert-danger py-0 d-none">
+          This data is Not Vaild,<span class="text-black-50"
+            >"You must start with capital letter and contain 3-30 letters"</span
+          >
         </p>
       </div>
 
@@ -42,8 +44,10 @@
           class="form-control mb-3"
           id="productPriceInput"
         />
-        <p id="productPriceEx" class="alert alert-danger py-0 d-none">
-          This data is Not Vaild
+        <p id="productPriceValid" class="alert alert-danger py-0 d-none">
+          This data is Not Vaild,<span class="text-black-50"
+            >"You must enter a number between 1 and 1000000"</span
+          >
         </p>
       </div>
       <div class="mb-3">
@@ -56,8 +60,10 @@
           class="form-control mb-3"
           id="productCategoryInput"
         />
-        <p id="productCategoryEx" class="alert alert-danger py-0 d-none">
-          This data is Not Vaild
+        <p id="productCategoryVaild" class="alert alert-danger py-0 d-none">
+          This data is Not Vaild,<span class="text-black-50"
+            >"You must start with capital letter and contain 3-30 letters"</span
+          >
         </p>
       </div>
       <div class="mb-3">
@@ -68,8 +74,11 @@
           class="form-control mb-3"
           id="productDescInput"
         ></textarea>
-        <p id="productDesEx" class="alert alert-danger py-0 d-none">
-          This data is Not Vaild
+        <p id="productDesValid" class="alert alert-danger py-0 d-none">
+          This data is Not Vaild,<span class="text-black-50"
+            >"You must start with capital letter and contain 3-300
+            letters"</span
+          >
         </p>
       </div>
 
@@ -86,6 +95,7 @@
         type="text"
         class="form-control w-50 m-auto mb-3"
         placeholder="Search..."
+        onkeyup="displayProduct()"
       />
 
       <table class="table text-white text-center">
@@ -98,7 +108,8 @@
           <th>Update</th>
           <th>Delete</th>
         </thead>
-        <tbody id="tBody"></tbody>
+        <tbody id="tBody">
+        </tbody>
       </table>
     </div>
   </body>
