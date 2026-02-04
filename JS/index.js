@@ -129,25 +129,25 @@ function isDataValid(name, price, category, desc) {
   isValid = true;
   if (!productNameRegExp.test(name)) {
     document.getElementById("productNameValid").classList.remove("d-none");
-    return (isValid = false);
+    isValid = false;
   } else {
     document.getElementById("productNameValid").classList.add("d-none");
   }
   if (!productPriceRegexp.test(price)) {
     document.getElementById("productPriceValid").classList.remove("d-none");
-    return (isValid = false);
+    isValid = false;
   } else {
     document.getElementById("productPriceValid").classList.add("d-none");
   }
   if (!productCategoryRegExp.test(category)) {
     document.getElementById("productCategoryVaild").classList.remove("d-none");
-    return (isValid = false);
+    isValid = false;
   } else {
     document.getElementById("productCategoryVaild").classList.add("d-none");
   }
   if (!productDescRegExp.test(desc)) {
     document.getElementById("productDesValid").classList.remove("d-none");
-    return (isValid = false);
+    isValid = false;
   } else {
     document.getElementById("productDesValid").classList.add("d-none");
   }
