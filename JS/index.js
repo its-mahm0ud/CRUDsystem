@@ -153,3 +153,43 @@ function isDataValid(name, price, category, desc) {
   }
   return isValid;
 }
+
+// Validation With Typing
+function validationWithTyping(regex, input) {
+  return Boolean(regex.test(input));
+}
+productNameInput.addEventListener("keyup", function () {
+  if (validationWithTyping(productNameRegExp, productNameInput.value.trim())) {
+    document.getElementById("productNameValid").classList.add("d-none");
+  } else {
+    document.getElementById("productNameValid").classList.remove("d-none");
+  }
+});
+productPriceInput.addEventListener("keyup", function () {
+  if (
+    validationWithTyping(productPriceRegexp, productPriceInput.value.trim())
+  ) {
+    document.getElementById("productPriceValid").classList.add("d-none");
+  } else {
+    document.getElementById("productPriceValid").classList.remove("d-none");
+  }
+});
+productCategoryInput.addEventListener("keyup", function () {
+  if (
+    validationWithTyping(
+      productCategoryRegExp,
+      productCategoryInput.value.trim(),
+    )
+  ) {
+    document.getElementById("productCategoryVaild").classList.add("d-none");
+  } else {
+    document.getElementById("productCategoryVaild").classList.remove("d-none");
+  }
+});
+productDescInput.addEventListener("keyup", function () {
+  if (validationWithTyping(productDescRegExp, productDescInput.value.trim())) {
+    document.getElementById("productDesValid").classList.add("d-none");
+  } else {
+    document.getElementById("productDesValid").classList.remove("d-none");
+  }
+});
