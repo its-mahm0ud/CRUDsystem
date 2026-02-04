@@ -125,34 +125,60 @@ function updateProduct(productIndex) {
   addProductBtn.innerHTML = " Update Product";
 }
 // Check Validation
-function isDataValid(name, price, category, desc) {
-  isValid = true;
-  if (!productNameRegExp.test(name)) {
-    document.getElementById("productNameValid").classList.remove("d-none");
-    isValid = false;
-  } else {
-    document.getElementById("productNameValid").classList.add("d-none");
-  }
-  if (!productPriceRegexp.test(price)) {
-    document.getElementById("productPriceValid").classList.remove("d-none");
-    isValid = false;
-  } else {
-    document.getElementById("productPriceValid").classList.add("d-none");
-  }
-  if (!productCategoryRegExp.test(category)) {
-    document.getElementById("productCategoryVaild").classList.remove("d-none");
-    isValid = false;
-  } else {
-    document.getElementById("productCategoryVaild").classList.add("d-none");
-  }
-  if (!productDescRegExp.test(desc)) {
-    document.getElementById("productDesValid").classList.remove("d-none");
-    isValid = false;
-  } else {
-    document.getElementById("productDesValid").classList.add("d-none");
-  }
-  return isValid;
+function checkValidation(value, regex) {
+  return Boolean(regex.test(value));
 }
+function isDataValid(name, price, category, desc) {
+  if (checkValidation(name, productNameRegExp)) {
+    document.getElementById("productNameValid").classList.add("d-none");
+  } else {
+    document.getElementById("productNameValid").classList.remove("d-none");
+  }
+  if (checkValidation(price, productPriceRegexp)) {
+    document.getElementById("productPriceValid").classList.add("d-none");
+  } else {
+    document.getElementById("productPriceValid").classList.remove("d-none");
+  }
+  if (checkValidation(category, productCategoryRegExp)) {
+    document.getElementById("productCategoryVaild").classList.add("d-none");
+  } else {
+    document.getElementById("productCategoryVaild").classList.remove("d-none");
+  }
+  if (checkValidation(desc, productDescRegExp)) {
+    document.getElementById("productDesValid").classList.add("d-none");
+  } else {
+    document.getElementById("productDesValid").classList.remove("d-none");
+  }
+}
+
+// function isDataValid(name, price, category, desc) {
+//   isValid = true;
+//   if (!productNameRegExp.test(name)) {
+//     document.getElementById("productNameValid").classList.remove("d-none");
+//     isValid = false;
+//   } else {
+//     document.getElementById("productNameValid").classList.add("d-none");
+//   }
+//   if (!productPriceRegexp.test(price)) {
+//     document.getElementById("productPriceValid").classList.remove("d-none");
+//     isValid = false;
+//   } else {
+//     document.getElementById("productPriceValid").classList.add("d-none");
+//   }
+//   if (!productCategoryRegExp.test(category)) {
+//     document.getElementById("productCategoryVaild").classList.remove("d-none");
+//     isValid = false;
+//   } else {
+//     document.getElementById("productCategoryVaild").classList.add("d-none");
+//   }
+//   if (!productDescRegExp.test(desc)) {
+//     document.getElementById("productDesValid").classList.remove("d-none");
+//     isValid = false;
+//   } else {
+//     document.getElementById("productDesValid").classList.add("d-none");
+//   }
+//   return isValid;
+// }
 
 // Validation With Typing
 function validationWithTyping(regex, input) {
